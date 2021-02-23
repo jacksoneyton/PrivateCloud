@@ -1,0 +1,7 @@
+#$IPTABLES -I FORWARD -p tcp -s 192.168.12.0/24 -d 24.230.33.54 --dport 1723 -j ACCEPT
+
+$IPTABLES -A INPUT -i eno1.1 -dport 67:68 -sport 67:68 -j DROP
+
+iptables -A FORWARD -i eno1.1 -o eno1 -j ACCEPT
+iptables -A FORWARD -i eno1 -o eno1.1 -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
