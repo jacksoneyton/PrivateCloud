@@ -1,0 +1,49 @@
+How would I run GPT-3 entirely locally on my computer with no internet access?
+
+It is not currently possible to run GPT-3 entirely locally on your computer without internet access. GPT-3 is a large language model that is hosted by OpenAI, and it requires an internet connection to make API requests to the model.
+
+If you want to use GPT-3 for offline text generation on your computer, you will need to find a way to connect to the internet and make API requests to the GPT-3 endpoint.
+
+One option you might consider is to use a smaller language model that can be run locally on your computer. OpenAI has released several smaller language models that can be installed and used locally, including GPT, GPT-2, and GPT-3 Lite. These models are not as powerful as the full GPT-3 model, but they may be sufficient for your needs and can be run entirely locally on your computer.
+
+To use a smaller language model locally on your computer, you will need to do the following:
+
+Install the OpenAI Python library on your computer by running the following command: pip install openai
+Download the model weights and save them to a local directory.
+Use the OpenAI Python library to load the model weights and generate text using the openai.api_key and openai.Model.from_file() functions.
+Here is an example of how you might use GPT-2 locally on your computer in a Python script:
+
+--Copy code
+import openai
+
+# The model to use (change this to the model you want to use)
+model_engine = "davinci"
+
+# The directory where the model weights are stored
+model_directory = "path/to/model/directory"
+
+# Load the model
+model = openai.Model.from_file(model_directory)
+
+# The prompt to generate text from
+prompt = "What is the weather like today?"
+
+# Set the completions options
+completions = openai.Completion.create(
+    engine=model_engine,
+    prompt=prompt,
+    max_tokens=1024,
+    n=1,
+    stop=None,
+    temperature=0.5,
+    model=model
+)
+
+# Get the generated text
+message = completions.choices[0].text
+
+# Print the generated text
+print(message)
+This code will load the GPT-2 model from the local directory and use it to generate text based on the prompt. You can then use the generated text in your own application or server.
+
+I hope this helps! Let me know if you have any questions.
